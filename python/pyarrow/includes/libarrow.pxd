@@ -330,6 +330,10 @@ cdef extern from "arrow/api.h" namespace "arrow" nogil:
         CMemoryPool** out)
     cdef CStatus c_mimalloc_memory_pool" arrow::mimalloc_memory_pool"(
         CMemoryPool** out)
+    cdef CStatus c_hooked_memory_pool" arrow::hooked_memory_pool"(
+        const c_string& param,
+        CMemoryPool** out)
+        
 
     CStatus c_jemalloc_set_decay_ms" arrow::jemalloc_set_decay_ms"(int ms)
 

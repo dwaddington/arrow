@@ -173,6 +173,10 @@ Status jemalloc_set_decay_ms(int ms);
 /// May return NotImplemented if mimalloc is not available.
 ARROW_EXPORT Status mimalloc_memory_pool(MemoryPool** out);
 
+/// \brief Get hooked memory pool.  Weak-symbol defined for implementation
+/// through link-time or LD_PRELOAD
+ARROW_EXPORT_WEAK Status hooked_memory_pool(const std::string& param, MemoryPool** out);
+
 ARROW_EXPORT std::vector<std::string> SupportedMemoryBackendNames();
 
 }  // namespace arrow

@@ -98,7 +98,7 @@ constexpr size_t kAlignment = 64;
 
 constexpr char kDefaultBackendEnvVar[] = "ARROW_DEFAULT_MEMORY_POOL";
 
-enum class MemoryPoolBackend : uint8_t { System, Jemalloc, Mimalloc };
+enum class MemoryPoolBackend : uint8_t { System, Jemalloc, Mimalloc, Hooked };
 
 struct SupportedBackend {
   const char* name;
@@ -502,6 +502,10 @@ Status mimalloc_memory_pool(MemoryPool** out) {
 #endif
 }
 
+Status hooked_memory_pool(const std::string& param, MemoryPool** out) {
+  return Status::NotImplemented("Hooked memory allocators must replace weak symbol");
+}
+
 MemoryPool* default_memory_pool() {
   auto backend = DefaultBackend();
   switch (backend) {
@@ -514,7 +518,7 @@ MemoryPool* default_memory_pool() {
 #ifdef ARROW_MIMALLOC
     case MemoryPoolBackend::Mimalloc:
       return &mimalloc_pool;
-#endif
+#endif    
     default:
       ARROW_LOG(FATAL) << "Internal error: cannot create default memory pool";
       return nullptr;

@@ -38,6 +38,9 @@
 #ifndef ARROW_EXPORT
 #define ARROW_EXPORT __attribute__((visibility("default")))
 #endif
+#ifndef ARROW_EXPORT_WEAK
+#define ARROW_EXPORT_WEAK __attribute__((weak)) __attribute__((visibility("default")))
+#endif
 #ifndef ARROW_NO_EXPORT
 #define ARROW_NO_EXPORT __attribute__((visibility("hidden")))
 #define ARROW_FORCE_INLINE

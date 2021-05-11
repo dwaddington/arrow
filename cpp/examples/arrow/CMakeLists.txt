@@ -16,6 +16,7 @@
 # under the License.
 
 ADD_ARROW_EXAMPLE(row_wise_conversion_example)
+ADD_ARROW_EXAMPLE(memory_handling_example)
 
 if (ARROW_PARQUET AND ARROW_DATASET)
   if (ARROW_BUILD_SHARED)
@@ -34,3 +35,5 @@ if (ARROW_PARQUET AND ARROW_DATASET)
     ${DATASET_EXAMPLES_LINK_LIBS})
   add_dependencies(dataset_documentation_example parquet)
 endif()
+
+

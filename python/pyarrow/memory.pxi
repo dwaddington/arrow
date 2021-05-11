@@ -165,6 +165,21 @@ def mimalloc_memory_pool():
     return pool
 
 
+def hooked_memory_pool(param):
+    """
+    Return a memory pool based on hooking arrow::hooked_memory_pool
+
+    NotImplementedError is raised if hooked support is not enabled.
+    """
+    cdef:
+        CMemoryPool* c_pool
+        MemoryPool pool = MemoryPool.__new__(MemoryPool)
+    
+    check_status(c_hooked_memory_pool(param.encode('UTF-8'), &c_pool))
+    pool.init(c_pool)
+    return pool
+
+
 def set_memory_pool(MemoryPool pool):
     c_set_default_memory_pool(pool.pool)
 
